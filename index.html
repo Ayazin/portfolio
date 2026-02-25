@@ -125,12 +125,12 @@
 
 <nav>
   <div class="container">
-    <a href="#" class="nav-logo">GR<span>.</span></a>
+    <a href="file:///C:/Users/gerson.silva/Downloads/index.html#" class="nav-logo">GR<span>.</span></a>
     <ul class="nav-links">
-      <li><a href="#projetos" style="">Projetos</a></li>
-      <li><a href="#skills" style="">Skills</a></li>
-      <li><a href="#experiencia" style="">Experiência</a></li>
-      <li><a href="#contato">Contato</a></li>
+      <li><a href="file:///C:/Users/gerson.silva/Downloads/index.html#projetos" style="">Projetos</a></li>
+      <li><a href="file:///C:/Users/gerson.silva/Downloads/index.html#skills" style="">Skills</a></li>
+      <li><a href="file:///C:/Users/gerson.silva/Downloads/index.html#experiencia" style="">Experiência</a></li>
+      <li><a href="file:///C:/Users/gerson.silva/Downloads/index.html#contato">Contato</a></li>
     </ul>
   </div>
 </nav>
@@ -143,7 +143,7 @@
         <h1>Gerson<br><em>Rocha</em></h1>
         <p class="hero-desc">Analista de Dados &amp; BI com background em Engenharia Civil. Construo pipelines de dados completos — do SQL ao dashboard, com automação e monitoramento.</p>
         <div class="hero-cta">
-          <a href="#projetos" class="btn btn-primary">Ver projetos →</a>
+          <a href="file:///C:/Users/gerson.silva/Downloads/index.html#projetos" class="btn btn-primary">Ver projetos →</a>
           <a href="https://www.linkedin.com/in/gerson-rocha-34302221a" target="_blank" class="btn btn-outline">LinkedIn ↗</a>
         </div>
       </div>
@@ -377,7 +377,7 @@
       <h2>Pronto para novos desafios</h2>
       <p style="color:var(--muted); max-width:480px; margin: 0 auto;">Aberto a oportunidades em Dados &amp; BI. Entre em contato por e-mail ou LinkedIn.</p>
       <div class="contact-links">
-        <a href="/cdn-cgi/l/email-protection#73141601001c1d011c101b124340331b1c071e121a1f5d101c1e" class="btn btn-primary"><span class="__cf_email__" data-cfemail="23444651504c4d514c404b421310634b4c574e424a4f0d404c4e">[email&#160;protected]</span></a>
+        <a href="mailto:gersonrocha03@hotmail.com" class="btn btn-primary">gersonrocha03@hotmail.com</a>
         <a href="https://www.linkedin.com/in/gerson-rocha-34302221a" target="_blank" class="btn btn-outline">LinkedIn ↗</a>
       </div>
     </div>
@@ -388,7 +388,7 @@
   <div class="container"><p>© 2026 Gerson Rocha · Analista de Dados &amp; BI · São Paulo, SP</p></div>
 </footer>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script>
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(el => { if (el.isIntersecting) el.target.classList.add('visible'); });
   }, { threshold: 0.1 });
@@ -407,4 +407,12 @@
   }
   function closeLightbox() {
     document.getElementById('lightbox').classList.remove('open');
-    document.body.style.overflow
+    document.body.style.overflow = '';
+  }
+  document.getElementById('lightbox').addEventListener('click', function(e) {
+    if (e.target === this) closeLightbox();
+  });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
+</script>
+
+</body></html>
