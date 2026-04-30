@@ -1,0 +1,105 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Thu Apr 30 09:33:43 2026
+
+@author: gerson.silva
+"""
+import yfinance as yf
+import pandas as pd
+import requests
+import os
+
+def enviar_telegram(mensagem):
+    TOKEN = "TOKEN DO SEU BOT"
+    CHAT_ID = "CHAT_ID"  
+
+    url = f"https://api.telegram.org/bot{TOKEN}/sendMessage"
+
+    payload = {
+        "chat_id": CHAT_ID,
+        "text": mensagem
+    }
+
+    requests.post(url, data=payload)
+
+ativos = ["MXRF11.SA". "KNCR11.SA"]
+
+def buscar_preco_atual(ticker):
+    ativo = yf.Ticker(ticker)
+    dados = ativo.history(period="1d")
+    preco = dados["Close"].iloc[-1]
+    return float(preco)
+
+
+carteira = {
+    "MXRF11.SA":{
+        "quantidade": 1,
+        "preco_medio": 9.90,
+        "variacao": 0.05 
+        },
+    "KNCR11.SA":{
+        "quantidade": 1,
+        "preco_medio": 106.82,
+        "variacao": 0.009
+        }
+    }
+
+def calcular_preco_procurado(preco_medio, variacao):
+    return preco_medio * (1 - variacao)
+
+def deve_avisar(preco_atual, preco_medio, variacao):
+    if preco_medio <= 0:
+        return False  # ainda não temos referência
+
+    preco_alvo = preco_medio * (1 - variacao)
+
+    return preco_atual < preco_alvo and preco_atual < preco_medio
+
+dados_carteira = []
+
+for ativo, info in carteira.items():
+    preco_atual = buscar_preco_atual(ativo)
+    
+    preco_alvo = calcular_preco_procurado(
+        info ["preco_medio"], 
+        info ["variacao"]
+        )
+    
+    aviso = deve_avisar(
+        preco_atual,
+        info ["preco_medio"],
+        info ["variacao"]
+        )
+    
+    linha = {
+        "ativo": ativo,
+        "quantidade": info["quantidade"],
+        "preco_medio": info["preco_medio"],
+        "variacao": info["variacao"],
+        "preco_atual": preco_atual,
+        "preco_alvo": preco_alvo,
+        "avisar": aviso
+        }
+    
+    dados_carteira.append(linha)
+
+
+
+for linha in dados_carteira:
+    if linha["avisar"]:
+        mensagem = (
+            "OPORTUNIDADE DE COMPRA DETECTADA\n\n"
+            f"Ativo: {linha['ativo']}\n"
+            f"Preço médio: {linha['preco_medio']:.2f}\n"
+            f"Preço atual: {linha['preco_atual']:.2f}\n"
+            f"Preço alvo: {linha['preco_alvo']:.2f}"
+        )
+
+        print(mensagem)
+        enviar_telegram(mensagem)
+        
+df = pd.DataFrame(dados_carteira)
+
+df_tbl = df[["ativo","quantidade", "preco_medio", "preco_atual", "preco_alvo", "avisar"]]
+
+print(df_tbl)
