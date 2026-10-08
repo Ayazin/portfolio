@@ -1,0 +1,30 @@
+const $=s=>document.querySelector(s),tst=m=>{ts.textContent=m;ts.classList.add('on');setTimeout(()=>ts.classList.remove('on'),1800)};
+const MENU=['Centros de Custo','Unidades de Medida','Insumos e Serviços','Produtos de Nutrição Animal','Categorias de Animais','Grupo de contas financeiras','Contas financeiras'];
+const OUT=[['Operações do Rebanho',''],['Financeiro',''],['Parâmetros Econômicos',''],['Análises',''],['Segurança','']];
+let cc=[{c:1,f:'Santa Clara',uf:'MT',a:1250.5,t:'Operacional',p:'Própria',s:'Ativo'},{c:2,f:'São João',uf:'MS',a:820.75,t:'Operacional',p:'Terceiros',s:'Ativo'},{c:3,f:'Boa Vista',uf:'GO',a:410.3,t:'Administrativo',p:'Própria',s:'Inativo'}];
+let ca=[[1,'Bezerro [0-12]','Macho',0,12],[2,'Garrote [13-24]','Macho',13,24],[3,'Boi Gordo I [25-36]','Macho',25,36],[4,'Boi Gordo II [>36]','Macho',37,999999],[21,'Bezerra','Fêmea',0,12],[6,'Novilha [13-24]','Fêmea',13,24],[7,'Vaca Gorda I [25-36]','Fêmea',25,36],[8,'Vaca Gorda II [>36]','Fêmea',37,999999]].map(([c,n,s,i,m])=>({c,n,s,i,m}));
+let tela='Centros de Custo',open=true,res=null;
+function nav(){$('#nav').innerHTML=`<div class="g ${open?'on':''}" data-g>⌂ Cadastros<i>⌃</i></div>`+(open?`<div class="sub">${MENU.map(m=>`<a class="${m==tela?'on':''}" data-m="${m}">${m}</a>`).join('')}</div>`:'')+OUT.map(o=>`<div class="g" data-o>${o[1]} ${o[0]}<i>⌄</i></div>`).join('')}
+$('#nav').onclick=e=>{const t=e.target.closest('[data-g],[data-m],[data-o]');if(!t)return;if(t.dataset.m){tela=t.dataset.m;res=null;go()}else if('g' in t.dataset){open=!open;nav()}else tst('Módulo disponível no app completo')};
+function go(){nav();if(tela=='Centros de Custo')vCC();else if(tela=='Categorias de Animais')vCA();else $('#main').innerHTML=`<div class="bc">Cadastros &gt; ${tela}</div><p>Tela não incluída nesta demo.</p>`}
+const radio=(n,l,v)=>`<div class="row"><label>${l}:</label>${v.map((x,i)=>`<label class="o"><input type="radio" name="${n}" value="${x}" ${i?'':'checked'}>${x}</label>`).join('')}</div>`;
+function vCC(){$('#main').innerHTML=`<div class="bc">Cadastros &gt; Centros de Custo</div><div class="sec">Parâmetros da consulta</div>
+<div class="row"><label>Fazenda:</label><div class="sel"><select id="fz"><option value=""></option>${cc.map(x=>`<option>${x.f}</option>`).join('')}</select></div></div>
+${radio('t','Tipo de Centro de Custo',['Todos','Operacional','Administrativo'])}${radio('p','Propriedade',['Todos','Própria','Terceiros'])}${radio('s','Situação',['Todos','Ativo','Inativo'])}
+<div class="btns"><button class="b" id="bn">Novo</button><button class="b" id="bl">Limpar</button><button class="b p" id="bc">Consultar</button></div>
+<div class="sec">Resultado da consulta</div><div class="tb" id="tb"></div>`;
+const rd=n=>document.querySelector(`[name=${n}]:checked`).value;
+bc.onclick=()=>{const f=fz.value,t=rd('t'),p=rd('p'),s=rd('s');res=cc.filter(x=>(!f||x.f==f)&&(t=='Todos'||x.t==t)&&(p=='Todos'||x.p==p)&&(s=='Todos'||x.s==s));tCC()};
+bl.onclick=()=>{res=null;vCC()};bn.onclick=()=>fCC();tCC()}
+function tCC(){const el=$('#tb');if(!res){el.innerHTML='';return}
+el.innerHTML=`<table><thead><tr><th>Código</th><th>Fazenda</th><th>UF</th><th>Área Produtiva (hectare)</th><th>Tipo de Centro Custo</th><th>Propriedade</th><th>Situação</th></tr></thead><tbody>${res.map(x=>`<tr data-c="${x.c}"><td>${x.c}</td><td>${x.f}</td><td>${x.uf}</td><td>${x.a.toLocaleString('pt-BR',{minimumFractionDigits:2})}</td><td>${x.t}</td><td>${x.p}</td><td>${x.s}</td></tr>`).join('')||'<tr><td colspan=7>Nenhum registro encontrado.</td></tr>'}</tbody></table>`;
+el.onclick=e=>{const r=e.target.closest('tr[data-c]');if(r)fCC(cc.find(x=>x.c==r.dataset.c))}}
+function fCC(x){form('Centro de Custo',[['f','Fazenda','text'],['uf','UF','text'],['a','Área produtiva (ha)','number'],['t','Tipo','sel',['Operacional','Administrativo']],['p','Propriedade','sel',['Própria','Terceiros']],['s','Situação','sel',['Ativo','Inativo']]],x||{t:'Operacional',p:'Própria',s:'Ativo'},v=>{if(!v.f.trim())return 'Informe a fazenda.';v.a=+v.a||0;if(x)Object.assign(x,v);else cc.push({c:Math.max(0,...cc.map(i=>i.c))+1,...v});res=cc;vCC();res=cc;tCC();return 0},x&&(()=>{cc=cc.filter(i=>i!=x);res=cc;vCC();res=cc;tCC()}))}
+function vCA(){$('#main').innerHTML=`<div class="bc">Cadastros &gt; Categorias de Animais<button class="b p novo" id="bn">Novo</button></div><div class="tb full"><table><thead><tr><th>Código</th><th>Categoria Animal</th><th>Sexo</th><th>Idade Mínima</th><th>Idade Máxima</th></tr></thead><tbody>${ca.map(x=>`<tr data-c="${x.c}"><td>${x.c}</td><td>${x.n}</td><td>${x.s}</td><td>${x.i}</td><td>${x.m}</td></tr>`).join('')}</tbody></table></div>`;
+bn.onclick=()=>fCA();$('.tb').onclick=e=>{const r=e.target.closest('tr[data-c]');if(r)fCA(ca.find(x=>x.c==r.dataset.c))}}
+function fCA(x){form('Categoria de Animal',[['n','Categoria Animal','text'],['s','Sexo','sel',['Macho','Fêmea']],['i','Idade mínima (meses)','number'],['m','Idade máxima (meses)','number']],x||{s:'Macho'},v=>{if(!v.n.trim())return 'Informe a categoria.';v.i=+v.i;v.m=+v.m;if(v.m<v.i)return 'A idade máxima não pode ser menor que a mínima.';if(x)Object.assign(x,v);else ca.push({c:Math.max(0,...ca.map(i=>i.c))+1,...v});vCA();return 0},x&&(()=>{ca=ca.filter(i=>i!=x);vCA()}))}
+function form(t,F,d,save,del){mt.textContent=t;mf.innerHTML=F.map(([k,l,ty,o])=>`<label>${l}</label>`+(ty=='sel'?`<select data-k="${k}">${o.map(z=>`<option ${d[k]==z?'selected':''}>${z}</option>`).join('')}</select>`:`<input type="${ty}" data-k="${k}" value="${d[k]??''}">`)).join('');
+mb.innerHTML=(del?'<button class="b d" id="mx">Excluir</button>':'')+'<button class="b" id="mc">Cancelar</button><button class="b p" id="ms">Confirmar</button>';mo.classList.add('on');
+mc.onclick=()=>mo.classList.remove('on');if(del)mx.onclick=()=>{del();mo.classList.remove('on');tst('Registro excluído')};
+ms.onclick=()=>{const v={};mf.querySelectorAll('[data-k]').forEach(e=>v[e.dataset.k]=e.value);const er=save(v);if(er)tst(er);else{mo.classList.remove('on');tst('Registro salvo')}}}
+go();

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="pt-BR"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Resultado das Obras</title>
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head><body>
+<div class="frame"><div class="app">
+<aside class="nv">
+<button class="flt" id="flt"><svg viewBox="0 0 24 24"><path d="M2 3h20l-7.5 9v8l-5 2v-10z" fill="currentColor"/></svg>Filtros</button>
+<nav id="nav"><button data-p="res"><svg viewBox="0 0 24 24"><path d="M3 3v18h18M7 15l4-5 3 3 5-7" fill="none" stroke="currentColor" stroke-width="2"/></svg>Resultado<br>dos Projetos</button>
+<button data-p="obras"><svg viewBox="0 0 24 24"><path d="M2 17h20v-4l-4-1-2-4H8v5H2zM6 19.5a1.5 1.5 0 100 .1zM18 19.5a1.5 1.5 0 100 .1z" fill="currentColor"/></svg>Custos das<br>Obras de<br>Reforma</button></nav>
+<div class="lg s"><i class="d1"></i><i class="d2"></i><b>LOGO</b><small>GRUPO</small></div>
+</aside>
+<main>
+<section id="capa" class="pg on"><div class="cv"><div class="hat"></div><div class="lg"><i class="d1"></i><i class="d2"></i><b>LOGO</b><small>GRUPO</small></div>
+<div class="ct"><p>PAINEL DE ANÁLISE &amp; GESTÃO</p><h1>OPERACIONAL</h1></div></div></section>
+
+<section id="res" class="pg">
+<div class="top"><div><h1>RESULTADO DOS PROJETOS</h1><p>Atualizado em: <b class="dt"></b></p></div>
+<div class="fl" id="flr"><label>Responsável e Equipe<select id="fResp"></select></label><label>Projeto<select id="fPr"></select></label><label>Doctos a realizar<select><option>Todos</option></select></label><label>Status dos Projetos<select id="fSt"><option>Todos</option><option>A</option><option>EP</option></select></label><label>Status das Obras<select><option>Todos</option></select></label></div></div>
+<div class="kpis" id="kpis"></div>
+<div class="card big"><h2>RELAÇÃO DE PROJETOS</h2><div class="sc"><table id="mx"></table></div><div class="rod">Para mais informações, selecione um item na tabela acima e clique aqui.</div></div>
+</section>
+
+<section id="obras" class="pg">
+<div class="top"><div><h1>CUSTOS DAS OBRAS DE REFORMA</h1><p>Atualizado em: <b class="dt"></b></p></div>
+<div class="fl"><label>Projeto<select id="fPj"></select></label><label>Coordenador<select id="fCo"></select></label><label>Status das Obras<select><option>Seleções múltiplas</option></select></label></div></div>
+<div class="tabs"><span class="on">Painel geral</span><span>Análise detalhada</span></div>
+<div class="ob">
+<div class="kpo" id="kpo"></div>
+<div class="card chc"><h2>RECEBIMENTOS &amp; PAGAMENTO EM ABERTO</h2><div id="ch" class="ch"></div></div>
+<div class="card dvc"><h2>DESVIO DOS CUSTOS</h2><button class="gear">⚙</button><div class="sc"><table id="dv"></table></div></div>
+<div class="bt">
+<div class="card rc"><h2>RECEBTOS EM ABERTO</h2><button class="gear" id="gr">⚙</button><table id="rb"></table>
+<div class="ov" id="ov"><div class="pop"><h3>CONFIGURAÇÃO DOS RECEBIMENTOS <span id="px">✕</span></h3><div class="pb"><label>Visualizar valores por:<select id="vv"><option>Tipo de Documento</option><option>Projeto</option></select></label><label>Ver recebimentos em aberto:<select id="vt"><option>Tudo</option><option>Vencidos</option><option>A vencer</option></select></label></div></div></div></div>
+<div class="card pc"><h2>PAGO DOS PRÓXIMOS 90 DIAS</h2><button class="gear">⚙</button><div class="sc"><table id="pg"></table></div></div>
+</div></div>
+</section></main></div></div>
+<script src="script.js"></script></body></html>
