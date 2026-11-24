@@ -180,6 +180,20 @@ const rowN=s=>
     cel(s.rc)+
     cel(s.mc,1);
 
+// ===== ÍCONES (traço) =====
+const svg=p=>`<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">${p}</svg>`;
+const SV={
+    rec:svg('<circle cx="12" cy="12" r="9"/><path d="M15 9.2c-.6-.8-1.7-1.2-3-1.2-1.7 0-3 .8-3 2s1.3 1.6 3 2 3 .8 3 2-1.3 2-3 2c-1.3 0-2.4-.4-3-1.2M12 6.5V8M12 16v1.5"/>'),
+    cus:svg('<path d="M4 7h16M7 7l1 13h8l1-13M9.5 7V4h5v3"/>'),
+    est:svg('<path d="M3 8l9-5 9 5-9 5z"/><path d="M3 8v8l9 5 9-5V8M12 13v8"/>'),
+    res:svg('<path d="M3 17l5-5 4 4 8-9"/><path d="M15 7h5v5"/>'),
+    mg:svg('<path d="M19 5L5 19"/><circle cx="7" cy="7" r="2.5"/><circle cx="17" cy="17" r="2.5"/>'),
+    ind:svg('<circle cx="9" cy="8" r="3"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><circle cx="17" cy="9" r="2.3"/><path d="M15.5 14.3c3 .1 5.5 2.6 5.5 5.7"/>'),
+    up:svg('<path d="M12 19V5M6 11l6-6 6 6"/>'),
+    dn:svg('<path d="M12 5v14M6 13l6 6 6-6"/>')
+};
+const box=(on,lbl)=>`<svg class="bx" viewBox="0 0 12 12" aria-hidden="true" focusable="false"><rect x=".5" y=".5" width="11" height="11" rx="1.5"/><path d="M3 6h6${on?'':'M6 3v6'}"/></svg>`;
+
 const card=(ic,bg,t,v,sub,rows,w)=>
     `<div class="kp">
         <h3>
@@ -226,8 +240,8 @@ function resumo(){
     $('#kpis').innerHTML=
 
         card(
-            '$',
-            '#b8c9ee',
+            SV.rec,
+            'var(--k-rec)',
             'RECEITAS',
             R(t.rec),
             'Realizado',
@@ -237,8 +251,8 @@ function resumo(){
         )+
 
         card(
-            '✕',
-            '#f4b8bd',
+            SV.cus,
+            'var(--k-cus)',
             'CUSTOS &amp; DESPESAS',
             R(t.cus),
             'Realizado',
@@ -248,8 +262,8 @@ function resumo(){
         )+
 
         card(
-            '▤',
-            '#f6cfae',
+            SV.est,
+            'var(--k-est)',
             'ESTOQUE DE INSUMOS',
             R(t.est),
             'Total',
@@ -257,8 +271,8 @@ function resumo(){
         )+
 
         card(
-            '↗',
-            '#bfe5c9',
+            SV.res,
+            'var(--k-res)',
             'RESULTADO',
             R(t.res),
             'Realizado',
@@ -268,8 +282,8 @@ function resumo(){
         )+
 
         card(
-            '%',
-            '#fbe9a6',
+            SV.mg,
+            'var(--k-mg)',
             'MARGEM',
             P(t.mg),
             'Realizada',
@@ -280,7 +294,7 @@ function resumo(){
 
         `<div class="kp">
             <h3>
-                <span class="ic" style="background:#f4b8bd">☻</span>
+                <span class="ic" style="background:var(--k-ind)">${SV.ind}</span>
                 INDICADORES
             </h3>
 
@@ -316,9 +330,7 @@ function resumo(){
         gr.map(([n,l])=>
             `<tr class="g">
                 <td>
-                    <span class="ex" data-n="${n}">
-                        ${open.has(n)?'⊟':'⊞'}
-                    </span>
+                    <button type="button" class="ex" data-n="${n}" aria-expanded="${open.has(n)}" aria-label="${open.has(n)?'Recolher':'Expandir'} ${n}">${box(open.has(n))}</button>
                     ${n}
                 </td>
                 <td></td>
@@ -330,7 +342,7 @@ function resumo(){
                     ?l.map(p=>
                         `<tr class="p">
                             <td>
-                                <span class="ex">⊞</span>
+                                <span class="ex">${box(false)}</span>
                                 ${p.n}
                             </td>
                             <td class="st${p.st}">${p.st}</td>
@@ -343,7 +355,7 @@ function resumo(){
 
         `<tr class="t">
             <td>
-                <span class="ex" style="visibility:hidden">⊞</span>
+                <span class="ex" style="visibility:hidden">${box(false)}</span>
                 Total
             </td>
             <td></td>
@@ -353,7 +365,7 @@ function resumo(){
 }
 
 $('#mx').onclick=e=>{
-    const n=e.target.dataset.n;
+    const b=e.target.closest('[data-n]'),n=b&&b.dataset.n;
 
     if(n){
         open.has(n)
@@ -379,7 +391,7 @@ fCo.innerHTML=opt(
 );
 
 const heat=(p,a)=>
-    `rgba(226,110,122,${Math.min(
+    `rgba(214,96,64,${Math.min(
         a+Math.abs(p)*2.6,
         .85
     ).toFixed(2)})`;
@@ -415,7 +427,7 @@ function obras(){
             return `
                 <tr>
                     <td>
-                        <span class="ex">⊞</span>
+                        <span class="ex">${box(false)}</span>
                         ${o[0]}
                     </td>
 
@@ -431,7 +443,7 @@ function obras(){
                              }">
                             <span>${n0(d)}</span>
                             <span class="${d>0?'up':'dn'}">
-                                ${d>0?'🡅':'🡇'}
+                                ${d>0?SV.up:SV.dn}
                             </span>
                         </div>
                     </td>
@@ -479,11 +491,11 @@ const kb=(ic,bg,t,a,b,pc,col)=>
         <hr>
 
         <small>${b[0]}</small>
-        <span class="s" style="font-size:13px;margin-left:4px">
+        <span class="s" style="font-size:13px">
             ${b[1]}
         </span>
 
-        <div style="margin:5px 0 4px 4px">
+        <div style="margin:5px 0 4px">
             <span class="bar">
                 <i style="width:${pc}%;background:${col}"></i>
             </span>
@@ -496,28 +508,28 @@ const kb=(ic,bg,t,a,b,pc,col)=>
 $('#kpo').innerHTML=
 
     kb(
-        '$',
-        '#b8c9ee',
+        SV.rec,
+        'var(--k-rec)',
         'RECEITAS',
         ['Valor comprometido','R$ 48.250.000'],
         ['Valor realizado','R$ 21.430.500'],
         44.4,
-        '#b5c6ea'
+        'var(--c-rec)'
     )+
 
     kb(
-        '✕',
-        '#f4b8bd',
+        SV.cus,
+        'var(--k-cus)',
         'CUSTOS &amp; DESPESAS',
         ['Valor comprometido','R$ 36.910.200'],
         ['Valor realizado','R$ 19.875.300'],
         53.8,
-        '#f1c4ca'
+        'var(--c-pag)'
     )+
 
     `<div class="kp">
         <h3>
-            <span class="ic" style="background:#bfe5c9">↗</span>
+            <span class="ic" style="background:var(--k-res)">${SV.res}</span>
             RESULTADO &amp; MARGEM
         </h3>
 
@@ -529,7 +541,7 @@ $('#kpo').innerHTML=
         <hr>
 
         <small>Resultado &amp; margem atual</small>
-        <span class="s" style="font-size:13px;margin-left:4px">
+        <span class="s" style="font-size:13px">
             R$ 1.555.200
         </span>
 
@@ -635,12 +647,12 @@ function renderRB(dados){
                         <div class="hc"
                              style="
                                 background:rgba(
-                                    45,
-                                    105,
-                                    98,
+                                    46,
+                                    160,
+                                    124,
                                     ${opacidade.toFixed(2)}
                                 );
-                                color:#1f4a44;
+                                color:#123c30;
                                 font-weight:600;
                              ">
                             ${R(valor)}
@@ -718,9 +730,9 @@ $('#pg').innerHTML=
                 <div class="hc"
                      style="
                         background:rgba(
-                            226,
-                            110,
-                            122,
+                            242,
+                            181,
+                            68,
                             ${(p[1]/1.3e6*.75).toFixed(2)}
                         )">
                     ${R(p[1])}

@@ -1,21 +1,81 @@
 <!DOCTYPE html>
 <html lang="pt-BR"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Gerson · Portfólio de Dados e Apps</title>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@600&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css"></head><body><div class="w">
-<section class="hero"><h1>Dados que viram decisões, apps que viram rotina.</h1>
-<p>Sou Gerson, analista de dados e BI com mais de 2 anos de experiência. Aqui estão demos interativas de aplicações que construí em Power Apps, recriadas para você testar direto no navegador.</p>
-<div class="links"><a href="#demos">Ver demos</a><a href="https://github.com/Ayazin">GitHub</a></div></section>
-<section id="demos"><h2>Demos</h2>
-<article class="proj"><div><h3>Planejamento da Pecuária</h3>
-<p>Cadastros de centros de custo e categorias de animais para o planejamento de rebanho. Filtre, crie, edite e exclua registros como no app original.</p>
-<div class="tags"><span>Power Apps</span><span>HTML</span><span>CSS</span><span>JavaScript</span><span>SharePoint</span><span>Power Automate</span></div>
-<a class="open" href="demos/pecuaria/index.html" target="_blank">Abrir em tela cheia</a></div>
-<div class="frame"><div class="bar"><i></i><i></i><i></i>&nbsp;Demo interativa</div><iframe src="demos/pecuaria/index.html" title="Demo Planejamento da Pecuária" loading="lazy"></iframe></div></article>
-<article class="proj"><div><h3>Resultado das Obras</h3>
-<p>Painéis de gestão de obras recriados do Power BI: resultado por responsável com linhas expansíveis, custos das obras com desvio, e recebimentos e pagamentos em aberto. Os filtros funcionam. Dados fictícios.</p>
-<div class="tags"><span>Power BI</span><span>DAX</span><span>PostGreSQL</span><span>Python</span><span>Power Query</span><span>Star Schema</span><span>HTML</span><span>CSS</span><span>JavaScript</span></div>
-<a class="open" href="demos/resultadosobras/index.html" target="_blank">Abrir em tela cheia</a></div>
-<div class="frame"><div class="bar"><i></i><i></i><i></i>&nbsp;Demo interativa</div><iframe src="demos/resultadosobras/index.html" title="Demo Resultado das Obras" loading="lazy"></iframe></div></article>
-<div class="soon">Próxima demo em construção.</div></section>
+<title>Gerson Rocha · Analista de Dados e BI</title>
+<meta name="description" content="Portfólio de Gerson Rocha, analista de dados e BI: painéis em Power BI, apps em Power Apps e demos interativas para testar no navegador.">
+<meta property="og:title" content="Gerson Rocha · Analista de Dados e BI">
+<meta property="og:description" content="Dados que viram decisões, apps que viram rotina. Demos interativas de Power BI e Power Apps.">
+<meta property="og:image" content="https://ayazin.github.io/portfolio/img/resultado-obras.jpg">
+<meta name="theme-color" content="#121417">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23121417'/%3E%3Cpath d='M9 11l6 5-6 5' fill='none' stroke='%23f2b544' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M17 22h7' stroke='%23eceae4' stroke-width='3' stroke-linecap='round'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css"></head><body>
+<a class="pular" href="#conteudo">Pular para o conteúdo</a>
+<div class="w">
+<header class="topo"><a class="marca" href="#"><span aria-hidden="true">&gt;</span> gerson.rocha</a>
+<nav aria-label="Seções"><a href="#projetos">/projetos</a><a href="#sobre">/sobre</a><a href="#contato">/contato</a></nav></header>
+
+<main id="conteudo">
+<section class="hero" aria-labelledby="titulo">
+  <p class="kick">// analista de dados e BI</p>
+  <h1 id="titulo">Dados que viram decisões, <span>apps que viram rotina.</span></h1>
+  <p class="lead">Mais de 2 anos transformando dados operacionais em painéis e aplicações usados no dia a dia, com Power BI, PostgreSQL, Python e Power Apps.</p>
+  <div class="cta"><a class="btn p" href="#projetos">Ver projetos</a><a class="btn" href="#contato">Contato</a></div>
+  <ul class="kpis" aria-label="Resumo">
+    <li><b>2+</b><small>anos com dados</small></li>
+    <li><b>3</b><small>projetos publicados</small></li>
+    <li><b>Power BI</b><small>DAX · Power Query</small></li>
+    <li><b>Power Apps</b><small>SharePoint · Automate</small></li>
+  </ul>
+</section>
+
+<section id="projetos" aria-labelledby="t-proj">
+  <div class="sh"><h2 id="t-proj">Projetos</h2><p>demos interativas · teste no navegador</p></div>
+
+  <article class="proj">
+    <div class="txt"><p class="idx">01 · demo</p><h3>Planejamento da Pecuária</h3>
+      <p>App em Power Apps para cadastros do planejamento de rebanho: centros de custo, categorias de animais e preços de mercado. Filtre, crie, edite e exclua registros como no app original.</p>
+      <ul class="sk" aria-label="Tecnologias"><li>Power Apps</li><li>SharePoint</li><li>Power Automate</li></ul>
+      <a class="lk" href="demos/pecuaria/index.html">Abrir demo <span aria-hidden="true">→</span></a></div>
+    <a class="thumb" href="demos/pecuaria/index.html" tabindex="-1" aria-hidden="true"><img src="img/pecuaria.jpg" alt="" width="1280" height="800" loading="lazy"></a>
+  </article>
+
+  <article class="proj">
+    <div class="txt"><p class="idx">02 · demo</p><h3>Resultado das Obras</h3>
+      <p>Relatório de Power BI para gestão de obras: resultado por responsável com linhas expansíveis, desvio de custos e recebimentos e pagamentos em aberto. Os filtros funcionam.</p>
+      <ul class="sk" aria-label="Tecnologias"><li>Power BI</li><li>DAX</li><li>Power Query</li><li>PostgreSQL</li><li>Python</li></ul>
+      <a class="lk" href="demos/resultadosobras/index.html">Abrir demo <span aria-hidden="true">→</span></a></div>
+    <a class="thumb" href="demos/resultadosobras/index.html" tabindex="-1" aria-hidden="true"><img src="img/resultado-obras.jpg" alt="" width="1280" height="800" loading="lazy"></a>
+  </article>
+
+  <article class="proj">
+    <div class="txt"><p class="idx">03 · site</p><h3>Focinho Certo</h3>
+      <p>Site de adoção de pets com filtros, quiz de compatibilidade, mapa de pets próximos e contato pelo WhatsApp, com testes automatizados em Playwright.</p>
+      <ul class="sk" aria-label="Tecnologias"><li>HTML</li><li>CSS</li><li>JavaScript</li><li>Playwright</li></ul>
+      <a class="lk" href="https://ayazin.github.io/focinho-certo/">Abrir site <span aria-hidden="true">→</span></a></div>
+    <a class="thumb" href="https://ayazin.github.io/focinho-certo/" tabindex="-1" aria-hidden="true"><img src="img/focinho-certo.jpg" alt="" width="1280" height="800" loading="lazy"></a>
+  </article>
+</section>
+
+<section id="sobre" class="sobre" aria-labelledby="t-sobre">
+  <h2 id="t-sobre">Sobre</h2>
+  <div>
+    <p>Sou Gerson, analista de dados e BI com mais de 2 anos de experiência transformando dados operacionais em painéis e aplicações usados no dia a dia.</p>
+    <p>Trabalho com Power BI (DAX, Power Query, modelagem em estrela), PostgreSQL e Python, e desenvolvo apps em Power Apps integrados ao SharePoint e ao Power Automate.</p>
+    <p>As demos deste site usam dados fictícios.</p>
+  </div>
+</section>
+
+<section id="contato" class="contato" aria-labelledby="t-contato">
+  <h2 id="t-contato">Vamos conversar<span>?</span></h2>
+  <p>Aberto a novas oportunidades como analista de dados e a projetos freelance.</p>
+  <ul>
+    <li><a href="mailto:gersonrocha03@hotmail.com">gersonrocha03@hotmail.com</a></li>
+    <li><a href="https://www.linkedin.com/in/gerson-rocha-34302221a/">LinkedIn</a></li>
+    <li><a href="https://github.com/Ayazin">GitHub</a></li>
+  </ul>
+</section>
+</main>
+
+<footer>© 2026 Gerson Rocha</footer>
 </div></body></html>

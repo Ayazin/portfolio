@@ -1,9 +1,25 @@
 <!DOCTYPE html>
 <html lang="pt-BR"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Planejamento da Pecuária</title>
-<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+<title>Planejamento da Pecuária · Demo</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23121417'/%3E%3Cpath d='M9 11l6 5-6 5' fill='none' stroke='%23f2b544' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M17 22h7' stroke='%23eceae4' stroke-width='3' stroke-linecap='round'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css"></head><body>
-<header><div><h1>Planejamento da Pecuária</h1><p>Cenário de exemplo para demonstração</p></div><span class="demo">Demo · dados fictícios</span></header>
-<div class="app"><nav id="nav"></nav><main id="main"></main></div>
-<div class="mo" id="mo"><div class="md"><h3 id="mt"></h3><div class="f" id="mf"></div><div class="ft" id="mb"></div></div></div><div class="toast" id="ts"></div>
+<header class="top">
+  <div><h1>Planejamento da Pecuária</h1><p>Cenário de exemplo · safra 2026/2027</p></div>
+  <span class="demo">Demo · dados fictícios</span>
+</header>
+<div class="app">
+  <nav id="nav" aria-label="Módulos do app"></nav>
+  <main id="main"></main>
+</div>
+<div class="mo" id="mo" hidden>
+  <div class="md" role="dialog" aria-modal="true" aria-labelledby="mt">
+    <div class="mh"><h2 id="mt"></h2><button class="x" id="mx" type="button" aria-label="Fechar"></button></div>
+    <p class="sec">Informações do cadastro</p>
+    <div class="f" id="mf"></div>
+    <div class="ft" id="mb"></div>
+  </div>
+</div>
+<div class="toast" id="ts" role="status" aria-live="polite"></div>
 <script src="script.js"></script></body></html>
